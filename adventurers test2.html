@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="jquery-2.0.3.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="characters.css"> </link> 
+		<script>
+			var baseAttributes = new Object();
+			baseAttributes['might']=2;
+			baseAttributes['will']=2;
+			baseAttributes['awareness']=2;
+			baseAttributes['lore']=2;
+			baseAttributes['health']=4;
+			baseAttributes['stamina']=2;
+			baseAttributes['defense']=1;
+			baseAttributes['speed']=4;
+			
+			var requiredAttributes = new Object();
+			requiredAttributes['might']=0;
+			requiredAttributes['will']=0;
+			requiredAttributes['awareness']=0;
+			requiredAttributes['lore']=0;
+			requiredAttributes['health']=0;
+			requiredAttributes['stamina']=0;
+			requiredAttributes['defense']=0;
+			requiredAttributes['speed']=0;
+			
+			var buildPoints = 9;
+			
+/*			function hero(name, race, roll, qualities) {
+				this.name = name;
+				this.race = getRace(race);
+				this.role = getRole(role);
+				this.qualities = getQualities(qualities);
+				updateAttributes(this);
+			}
+			
+			function getRace() {
+				return this.race;
+			}
+			
+			function qualities
+			
+			function getQualities
+			
+			function role
+			
+			function getRole
+			
+			function race
+
+			function getRace
+			
+			var hero = new hero("Ben", "Human", "Paladin", "Tough, Exceptional Will");*/ //old code regarding creation of classes, prob. disregard
+			
+			var Roles = new Object();
+				Roles["Fighter"] = new Object();
+				Roles["Fighter"].name = "Fighter";
+				Roles["Fighter"].race = "Human";
+				Roles["Fighter"].qualities = "Tough, Exceptional Will";
+				Roles["Fighter"].requirements = new Object();
+				Roles["Fighter"].requirements["Might"] = 3;
+				Roles["Fighter"].requirements["Will"] = 2;
+
+
+				Roles["Barbarian"] = new Object();
+				Roles["Barbarian"].name = "Barbarian";
+				Roles["Barbarian"].race = "Centaur";
+				Roles["Barbarian"].qualities = "Rugged, Exceptional Will, Good Speed";
+				Roles["Barbarian"].requirements = new Object();
+				Roles["Barbarian"].requirements["Might"] = 3;
+				Roles["Barbarian"].requirements["Health"] = 4;
+
+			function Hero(name, role) {
+  			     this.name = name;
+  			     this.role = Roles[role];
+  			     this.race = Races[Roles[role].race];
+				 this.qualities = Roles[role].qualities
+				 updateAttributes(this);
+			}
+			
+			var Races = new Object();
+				Races["Human"] = new Object();
+				Races["Human"].name = "Human";	
+				
+				Races["Centaur"] = new Object();
+				Races["Centaur"].name = "Centaur";
+			
+			var Qualities = new Object();
+	
+			function CreateQualitiesFor(attribute) {
+				Qualities["Good " + attribute] = new Object();
+				Qualities["Good " + attribute].cost = 1;
+				Qualities["Good " + attribute].attributes = new Object();
+				Qualities["Good " + attribute].attributes[attribute] = 	
+							baseAttributes[attribute] + 1;			
+
+				Qualities["Great " + attribute] = new Object();
+				Qualities["Great " + attribute].cost = 3;
+				Qualities["Great " + attribute].attributes = new Object();
+				Qualities["Great " + attribute].attributes[attribute] =
+							 baseAttributes[attribute] + 2;			
+			}
+			
+				CreateQualitiesFor("Health");
+				CreateQualitiesFor("Stamina");
+				CreateQualitiesFor("Defense");
+				CreateQualitiesFor("Speed");
+				CreateQualitiesFor("Might");
+				CreateQualitiesFor("Will");
+				CreateQualitiesFor("Awareness");
+				CreateQualitiesFor("Lore");
+
+			function updateAttributes(hero) {
+				
+			}
+
+Character = new Hero("Enter Your Name", "Fighter");
+		</script>
+	
+		
+		<title>
+			Adventurers Online Character Creater
+		</title>
+	</head>
+	<body>
+		<script>
+			alert('hero name is: ' + Character.name + ', hero role is: ' + Character.role.name + ', hero race is: ' + Character.race.name + ', hero qualities are: ' + Character.qualities);
+			
+		</script>
+	</body>
+</html>

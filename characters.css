@@ -1,0 +1,18 @@
+div {
+	height:300px;
+	width 200px;
+	position: relative;
+	display: inline-block;
+	border: 2px dashed;
+	}
+	
+#charsheet {
+	background-color:black;
+	margin: 50px;
+	border: 6px black;
+	}
+
+.selected {
+	background-color:grey;
+	}
+	

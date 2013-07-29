@@ -7,51 +7,29 @@
 		<script>
 			// the base attributes every character begins with. Treat this hash as a constant. Populate hero objects with this hash.
 			var baseAttributes = new Object();
-			baseAttributes['Might']=2;
-			baseAttributes['Will']=2;
-			baseAttributes['Awareness']=2;
-			baseAttributes['Lore']=2;
-			baseAttributes['Health']=4;
-			baseAttributes['Stamina']=2;
-			baseAttributes['Defense']=1;
-			baseAttributes['Speed']=4;
+			function CreateBaseAttributes() {
+				baseAttributes['Might']=2;
+				baseAttributes['Will']=2;
+				baseAttributes['Awareness']=2;
+				baseAttributes['Lore']=2;
+				baseAttributes['Health']=4;
+				baseAttributes['Stamina']=2;
+				baseAttributes['Defense']=1;
+				baseAttributes['Speed']=4;
+			}
 			
 			// the minimum required attributes for a hero to exist. When updating attributes, compare against hero's attributes. If hero's attributes < any value in this hash, prevent player from creating character.
 			var requiredAttributes = new Object();
-			requiredAttributes['Might']=0;
-			requiredAttributes['Will']=0;
-			requiredAttributes['Awareness']=0;
-			requiredAttributes['Lore']=0;
-			requiredAttributes['Health']=0;
-			requiredAttributes['Stamina']=0;
-			requiredAttributes['Defense']=0;
-			requiredAttributes['Speed']=0;
-			
-/*			function hero(name, race, roll, qualities) {
-				this.name = name;
-				this.race = getRace(race);
-				this.role = getRole(role);
-				this.qualities = getQualities(qualities);
-				updateAttributes(this);
+			function CreateRequiredAttributes() {
+				requiredAttributes['Might']=0;
+				requiredAttributes['Will']=0;
+				requiredAttributes['Awareness']=0;
+				requiredAttributes['Lore']=0;
+				requiredAttributes['Health']=0;
+				requiredAttributes['Stamina']=0;
+				requiredAttributes['Defense']=0;
+				requiredAttributes['Speed']=0;
 			}
-			
-			function getRace() {
-				return this.race;
-			}
-			
-			function qualities
-			
-			function getQualities
-			
-			function role
-			
-			function getRole
-			
-			function race
-
-			function getRace
-			
-			var hero = new hero("Ben", "Human", "Paladin", "Tough, Exceptional Will");*/ //old code regarding creation of classes, prob. disregard
 			
 			// a function to generate roles
 			var Roles = new Object();
@@ -122,18 +100,127 @@
 				Roles["Paladin"].requirements["Might"] = 2;
 			}
 					
-			// create a class Races
+			// a function to generate races
 			var Races = new Object();
+			function CreateRaces {
 				
 				// create a human race of object type Races
 				Races["Human"] = new Object();
-				Races["Human"].name = "Human";	
-				
-				// create a centaur race of object type Races
+				Races["Human"].name = "Human";
+				Races["Human"].unflipped = new Object();
+				Races["Human"].unflipped.modifier = new Object();
+				Races["Human"].unflipped.modifier["Will"] = +1;
+				Races["Human"].unflipped.ability = "Flip to reroll 1 or more dice in 1 attack or test.";
+				Races["Human"].flipped = new Object();
+				Races["Human"].flipped.modifier = new Object();
+				Races["Human"].flipped.ability = "Add 1 to all tests.";
+								
 				Races["Centaur"] = new Object();
 				Races["Centaur"].name = "Centaur";
-			
-			// create a class Qualities
+				Races["Centaur"].unflipped = new Object();
+				Races["Centaur"].unflipped.modifier = new Object();
+				Races["Centaur"].unflipped.modifier["Speed"] = +1;
+				Races["Centaur"].unflipped.modifier["Health"] = +1;
+				Races["Centaur"].unflipped.modifier["Defense"] = -1;
+				Races["Centaur"].unflipped.ability = "Flip as an action to move up to your speed, then make 1 melee attack.";
+				Races["Centaur"].flipped = new Object();
+				Races["Centaur"].flipped.modifier = new Object();
+				Races["Centaur"].flipped.modifier["Speed"] = +1;
+				Races["Centaur"].flipped.modifier["Health"] = +1;
+				Races["Centaur"].flipped.modifier["Defense"] = -1;
+				Races["Centaur"].flipped.ability = "Flip after resting instead of regaining fatigue.";
+				
+				Races["Elf"] = new Object();
+				Races["Elf"].name = "Elf";
+				Races["Elf"].unflipped = new Object();
+				Races["Elf"].unflipped.modifier = new Object();
+				Races["Elf"].unflipped.modifier["Speed"] = +1;
+				Races["Elf"].unflipped.modifier["Awareness"] = +1;
+				Races["Elf"].unflipped.modifier["Might"] = -1;
+				Races["Elf"].unflipped.ability = "Flip to reroll your attack roll.";
+				Races["Elf"].flipped = new Object();
+				Races["Elf"].flipped.modifier = new Object();
+				Races["Elf"].flipped.modifier["Speed"] = +1;
+				Races["Elf"].flipped.modifier["Might"] = -1;
+				Races["Elf"].flipped.ability = "Add 1 to all attack rolls.";
+				
+				Races["Dwarf"] = new Object();
+				Races["Dwarf"].name = "Dwarf";
+				Races["Dwarf"].unflipped = new Object();
+				Races["Dwarf"].unflipped.modifier = new Object();
+				Races["Dwarf"].unflipped.modifier["Health"] = +1;
+				Races["Dwarf"].unflipped.modifier["Will"] = +1;
+				Races["Dwarf"].unflipped.modifier["Speed"] = -1;
+				Races["Dwarf"].unflipped.ability = "Flip when you would gain a condition to discard that condition.";
+				Races["Dwarf"].flipped = new Object();
+				Races["Dwarf"].flipped.modifier = new Object();
+				Races["Dwarf"].flipped.modifier["Might"] = +1;
+				Races["Dwarf"].flipped.modifier["Stamina"] = +1;
+				Races["Dwarf"].flipped.modifier["Speed"] = -1;
+				Races["Dwarf"].flipped.ability = "+1 to armor.";
+				
+				Races["Halfling"] = new Object();
+				Races["Halfling"].name = "Halfling";
+				Races["Halfling"].unflipped = new Object();
+				Races["Halfling"].unflipped.modifier = new Object();
+				Races["Halfling"].unflipped.modifier["Defense"] = +1;
+				Races["Halfling"].unflipped.modifier["Awareness"] = +1;
+				Races["Halfling"].unflipped.modifier["Health"] = -1;
+				Races["Halfling"].unflipped.ability = "Flip to reroll one attack that targets you. Add the defense die if it was not already included.";
+				Races["Halfling"].flipped = new Object();
+				Races["Halfling"].flipped.modifier = new Object();
+				Races["Halfling"].flipped.modifier["Defense"] = +2;
+				Races["Halfling"].flipped.modifier["Awareness"] = +1;
+				Races["Halfling"].flipped.modifier["Health"] = -1;
+				Races["Halfling"].flipped.modifier["Might"] = -1;
+				Races["Halfling"].flipped.ability = "";
+				
+				Races["Pixie"] = new Object();
+				Races["Pixie"].name = "Pixie";
+				Races["Pixie"].unflipped = new Object();
+				Races["Pixie"].unflipped.modifier = new Object();
+				Races["Pixie"].unflipped.modifier["Speed"] = "Fly";
+				Races["Pixie"].unflipped.modifier["Stamina"] = +1;
+				Races["Pixie"].unflipped.modifier["Health"] = -1;
+				Races["Pixie"].unflipped.ability = "Flip as a move to teleport up to twice your speed.";
+				Races["Pixie"].flipped = new Object();
+				Races["Pixie"].flipped.modifier = new Object();
+				Races["Pixie"].flipped.modifier["Speed"] = "Fly";
+				Races["Pixie"].flipped.modifier["Defense"] = +1;
+				Races["Pixie"].flipped.modifier["Health"] = -1;
+				Races["Pixie"].flipped.ability = "";
+				
+				Races["Orc"] = new Object();
+				Races["Orc"].name = "Orc";
+				Races["Orc"].unflipped = new Object();
+				Races["Orc"].unflipped.modifier = new Object();
+				Races["Orc"].unflipped.modifier["Health"] = +1;
+				Races["Orc"].unflipped.modifier["Might"] = +1;
+				Races["Orc"].unflipped.modifier["Lore"] = -1;
+				Races["Orc"].unflipped.ability = "Flip after rolling an attack to gain +★ and +♥♥.";
+				Races["Orc"].flipped = new Object();
+				Races["Orc"].flipped.modifier = new Object();
+				Races["Orc"].flipped.modifier["Health"] = +1;
+				Races["Orc"].flipped.modifier["Might"] = +1;
+				Races["Orc"].flipped.modifier["Lore"] = -1;
+				Races["Orc"].flipped.modifier["Will"] = -1;
+				Races["Orc"].flipped.ability = "Add +♥ to all attack rolls.";
+				
+				Races["Tiefling"] = new Object();
+				Races["Tiefling"].name = "Tiefling";
+				Races["Tiefling"].unflipped = new Object();
+				Races["Tiefling"].unflipped.modifier = new Object();
+				Races["Tiefling"].unflipped.modifier["Lore"] = +1;
+				Races["Tiefling"].unflipped.modifier["Will"] = +1;
+				Races["Tiefling"].unflipped.modifier["Health"] = -3;
+				Races["Tiefling"].unflipped.ability = "Flip when you would be killed, then heal all wounds and regain all fatigue.";
+				Races["Tiefling"].flipped = new Object();
+				Races["Tiefling"].flipped.modifier = new Object();
+				Races["Tiefling"].flipped.modifier["Will"] = +1;
+				Races["Tiefling"].flipped.modifier["Stamina"] = +1;
+				Races["Tiefling"].flipped.modifier["Health"] = -2;
+				Races["Tiefling"].flipped.ability = "Add +★ to all attack rolls that do not roll an X.";
+			}
 	
 			// a function to generate qualities
 			var Qualities = new Object();	 
@@ -271,7 +358,8 @@
   			     this.role = Roles[role]; // assigns it a role object
   			     this.race = Races[Roles[role].race]; // assigns it a race object
 				 this.qualities = Roles[role].qualities; // assigns it a qualities object
-				 this.buildPoints = 9; // nine build points to spend 
+				 this.buildPoints = 9; // nine build points to spend
+				 this.attributes = new Object();
 				 updateAttributes(this); // this function will be used to update attributes each time player does something
 			}
 

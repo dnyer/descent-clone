@@ -361,12 +361,12 @@
 				 this.qualities = Roles[role].qualities; // assigns it a qualities string (comma separated)
 				 this.buildPoints = 9; // nine build points to spend
 				 this.attributes = new Object();
-				 updateAttributes(this); // this function will be used to update attributes each time player does something. Called once during character creation to update attributes initially.
+				 UpdateAttributes(this); // this function will be used to update attributes each time player does something. Called once during character creation to update attributes initially.
 			}
 			
 			//update attributes function
 			var qualitiesArray = new Array();
-			function updateAttributes(hero) {
+			function UpdateAttributes(hero) {
 				qualitiesArray = hero.qualities.split(", ");
 				for(attribute in baseAttributes) {
 					hero.attributes[attribute]=baseAttributes[attribute];
@@ -378,6 +378,15 @@
 					}
 				}	
 			}
+			
+			function CheckAttributes(hero) {
+			
+			}
+			
+			function DisplayHero(hero) {
+			
+			}
+			
 		</script>
 	
 		
@@ -395,6 +404,7 @@
 			var name = prompt("Please enter your name: ");
 			var role = prompt("Please enter your role in this group: ");
 			hero = new Hero(name, role);
+			DisplayHero(hero);
 		</script>
 	</body>
 </html>

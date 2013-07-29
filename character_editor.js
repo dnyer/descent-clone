@@ -25,6 +25,18 @@
 				requiredAttributes['Speed']=0;
 			}
 			
+			// when changing roles, update the required attributes hash with this function.
+			function UpdateRequiredAttributes() {
+			
+			}
+			
+			// each time player changes attributes, check that they are still fulfilling required attributes. if not, throw error.
+			function CheckRequiredAttributes() {
+			
+			}
+			
+			
+			
 			// a function to generate roles
 			var Roles = new Object();
 			function CreateRoles() {
@@ -377,15 +389,10 @@
 					    var quality = qualitiesArray[i];
 						if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) {
 							hero.attributes[attribute] = Qualities[quality].attributes[attribute];
-							console.log(attribute + " changed to " + hero.attributes[attribute]); //debugging
 						}
 					}
 				}	
 			}
-			
-			/*function CheckAttributes(hero) {
-			
-			}*/
 			
 			function DisplayHero(hero) {
 				document.getElementById('Heroname').innerHTML = hero.name;

@@ -17,12 +17,13 @@
 			var name = prompt("Please enter your name: ");
 			var role = prompt("Please enter your role in this group: ");
 			hero = new Hero(name, role);
-			DisplayHero(hero);
 		</script>
+		
+		<body onload = "DisplayHero(hero)">
 
 		<table border=0>
 		   <tr>
-			<td colspan=2 id='Name'></td>
+			<td colspan=2 id='Heroname'></td>
 			<td>&nbsp;&nbsp;&nbsp;</td>
 			<td colspan=2 id='Role'></td>
 		   </tr>

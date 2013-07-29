@@ -354,6 +354,7 @@
 				CreateQualities();
 
 			}
+			
 			// create a class Hero, accepts name and role to start
 			function Hero(name, role) {
   			     
@@ -376,17 +377,18 @@
 					    var quality = qualitiesArray[i];
 						if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) {
 							hero.attributes[attribute] = Qualities[quality].attributes[attribute];
+							console.log(attribute + " changed to " + hero.attributes[attribute]); //debugging
 						}
 					}
 				}	
 			}
 			
-			function CheckAttributes(hero) {
+			/*function CheckAttributes(hero) {
 			
-			}
+			}*/
 			
 			function DisplayHero(hero) {
-				document.getElementById('Name').innerHTML = hero.name;
+				document.getElementById('Heroname').innerHTML = hero.name;
 				document.getElementById('Role').innerHTML = hero.role.name;
 
 				for(attribute in baseAttributes) {

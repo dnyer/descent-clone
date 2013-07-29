@@ -354,24 +354,26 @@
 
 			// create a class Hero, accepts name and role to start
 			function Hero(name, role) {
+  			     
   			     this.name = name;
   			     this.role = Roles[role]; // assigns it a role object
   			     this.race = Races[Roles[role].race]; // assigns it a race object
-				 this.qualities = Roles[role].qualities; // assigns it a qualities object
+				 this.qualities = Roles[role].qualities; // assigns it a qualities string (comma separated)
 				 this.buildPoints = 9; // nine build points to spend
 				 this.attributes = new Object();
-				 updateAttributes(); // this function will be used to update attributes each time player does something
+				 updateAttributes(this); // this function will be used to update attributes each time player does something. Called once during character creation to update attributes initially.
 			}
 			
 			//update attributes function
 			var qualitiesArray = new Array();
 			function updateAttributes(hero) {
-				qualitiesArray = hero.qualities.split(",");
+				qualitiesArray = hero.qualities.split(", ");
 				for(attribute in baseAttributes) {
 					hero.attributes[attribute]=baseAttributes[attribute];
-					for (var quality in qualitiesArray) {
-						if (quality.attributes[attribute] > hero.attributes[attribute]) {
-							hero.attributes[attribute] = quality.attributes[attribute];
+					for (i=0; i<qualitiesArray.length; i++) {
+					    var quality = qualitiesArray[i];
+						if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) {
+							hero.attributes[attribute] = Qualities[quality].attributes[attribute];
 						}
 					}
 				}	
@@ -392,9 +394,7 @@
 			CreateQualities();
 			var name = prompt("Please enter your name: ");
 			var role = prompt("Please enter your role in this group: ");
-			hero = new Hero(name, role); // something wrong with hero creating function
-			alert(hero.qualities); // alert doesn't happen
-			updateAttributes(hero);
+			hero = new Hero(name, role);
 		</script>
 	</body>
 </html>

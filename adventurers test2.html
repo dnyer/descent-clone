@@ -33,7 +33,7 @@
 			
 			// a function to generate roles
 			var Roles = new Object();
-			function CreateRoles {
+			function CreateRoles() {
 				// create a fighter role of object type Roles
 				Roles["Fighter"] = new Object();
 				Roles["Fighter"].name = "Fighter";
@@ -102,7 +102,7 @@
 					
 			// a function to generate races
 			var Races = new Object();
-			function CreateRaces {
+			function CreateRaces() {
 				
 				// create a human race of object type Races
 				Races["Human"] = new Object();
@@ -360,14 +360,22 @@
 				 this.qualities = Roles[role].qualities; // assigns it a qualities object
 				 this.buildPoints = 9; // nine build points to spend
 				 this.attributes = new Object();
-				 updateAttributes(this); // this function will be used to update attributes each time player does something
+				 updateAttributes(); // this function will be used to update attributes each time player does something
 			}
-
+			
+			//update attributes function
+			var qualitiesArray = new Array();
 			function updateAttributes(hero) {
-				
+				qualitiesArray = hero.qualities.split(",");
+				for(attribute in baseAttributes) {
+					hero.attributes[attribute]=baseAttributes[attribute];
+					for (var quality in qualitiesArray) {
+						if (quality.attributes[attribute] > hero.attributes[attribute]) {
+							hero.attributes[attribute] = quality.attributes[attribute];
+						}
+					}
+				}	
 			}
-
-Character = new Hero("Enter Your Name", "Fighter");
 		</script>
 	
 		
@@ -377,8 +385,16 @@ Character = new Hero("Enter Your Name", "Fighter");
 	</head>
 	<body>
 		<script>
-			//alert('hero name is: ' + Character.name + ', hero role is: ' + Character.role.name + ', hero race is: ' + Character.race.name + ', hero qualities are: ' + Character.qualities);
-			//alert(Qualities["Great Health"].name);
+			CreateBaseAttributes();
+			CreateRequiredAttributes();
+			CreateRoles();
+			CreateRaces();
+			CreateQualities();
+			var name = prompt("Please enter your name: ");
+			var role = prompt("Please enter your role in this group: ");
+			hero = new Hero(name, role); // something wrong with hero creating function
+			alert(hero.qualities); // alert doesn't happen
+			updateAttributes(hero);
 		</script>
 	</body>
 </html>

@@ -53,27 +53,75 @@
 			
 			var hero = new hero("Ben", "Human", "Paladin", "Tough, Exceptional Will");*/ //old code regarding creation of classes, prob. disregard
 			
-			// create a class Roles
+			// a function to generate roles
 			var Roles = new Object();
+			function CreateRoles {
+				// create a fighter role of object type Roles
+				Roles["Fighter"] = new Object();
+				Roles["Fighter"].name = "Fighter";
+				Roles["Fighter"].race = "Orc"; // preferred race
+				Roles["Fighter"].qualities = "Strong, Nimble, Good Will"; // preferred qualities
+				Roles["Fighter"].requirements = new Object(); // create a requirements hash
+				Roles["Fighter"].requirements["Might"] = 3;
+				Roles["Fighter"].requirements["Will"] = 2;
+
+				Roles["Barbarian"] = new Object();
+				Roles["Barbarian"].name = "Barbarian";
+				Roles["Barbarian"].race = "Centaur"; 
+				Roles["Barbarian"].qualities = "Tough, Quick"; 
+				Roles["Barbarian"].requirements = new Object(); 
+				Roles["Barbarian"].requirements["Might"] = 3;
+				Roles["Barbarian"].requirements["Health"] = 4;
 			
-					//create a fighter role of object type Roles
-					Roles["Fighter"] = new Object();
-					Roles["Fighter"].name = "Fighter";
-					Roles["Fighter"].race = "Human"; // preferred race
-					Roles["Fighter"].qualities = "Tough, Exceptional Will"; // preferred qualities
-					Roles["Fighter"].requirements = new Object(); // create a requirements hash
-					Roles["Fighter"].requirements["Might"] = 3;
-					Roles["Fighter"].requirements["Will"] = 2;
-
-					//create a barbarian role of object type Roles
-					Roles["Barbarian"] = new Object();
-					Roles["Barbarian"].name = "Barbarian";
-					Roles["Barbarian"].race = "Centaur"; // preferred race
-					Roles["Barbarian"].qualities = "Rugged, Exceptional Will, Good Speed"; // preferred qualities
-					Roles["Barbarian"].requirements = new Object(); // create a requirements hash
-					Roles["Barbarian"].requirements["Might"] = 3;
-					Roles["Barbarian"].requirements["Health"] = 4;
-
+				Roles["Ranger"] = new Object();
+				Roles["Ranger"].name = "Ranger";
+				Roles["Ranger"].race = "Elf";
+				Roles["Ranger"].qualities = "Swift, Great Defense, Good Health"
+				Roles["Ranger"].requirements = new Object();
+				Roles["Ranger"].requirements["Speed"] = 4;
+				Roles["Ranger"].requirements["Awareness"] = 3;
+			
+				Roles["Thief"] = new Object();
+				Roles["Thief"].name = "Thief";
+				Roles["Thief"].race = "Halfling";
+				Roles["Thief"].qualities = "Agile, Great Awareness, Good Will";
+				Roles["Thief"].requirements = new Object();
+				Roles["Thief"].requirements["Defense"] = 2;
+				Roles["Thief"].requirements["Awareness"] = 2;
+			
+				Roles["Sorcerer"] = new Object();
+				Roles["Sorcerer"].name = "Sorcerer";
+				Roles["Sorcerer"].race = "Tiefling";
+				Roles["Sorcerer"].qualities = "Mystical, Agile";
+				Roles["Sorcerer"].requirements = new Object();
+				Roles["Sorcerer"].requirements["Lore"] = 3;
+				Roles["Sorcerer"].requirements["Stamina"] = 2;
+			
+				Roles["Summoner"] = new Object();
+				Roles["Summoner"].name = "Summoner";
+				Roles["Summoner"].race = "Pixie";
+				Roles["Summoner"].qualities = "Mystical, Alert, Good Health";
+				Roles["Summoner"].requirements = new Object();
+				Roles["Summoner"].requirements["Awareness"] = 3;
+				Roles["Summoner"].requirements["Health"] = 2;
+			
+				Roles["Sage"] = new Object();
+				Roles["Sage"].name = "Sage";
+				Roles["Sage"].race = "Human";
+				Roles["Sage"].qualities = "Inspired, Nimble";
+				Roles["Sage"].requirements = new Object();
+				Roles["Sage"].requirements["Will"] = 3;
+				Roles["Sage"].requirements["Lore"] = 2;
+			
+				Roles["Paladin"] = new Object();
+				Roles["Paladin"].name = "Paladin";
+				Roles["Paladin"].race = "Dwarf";
+				Roles["Paladin"].qualities = "Inspired, Rugged";
+				Roles["Paladin"].requirements = new Object();
+				Roles["Paladin"].requirements["Will"] = 3;
+				Roles["Paladin"].requirements["Might"] = 2;
+			}
+					
 			// create a class Races
 			var Races = new Object();
 				
@@ -86,10 +134,10 @@
 				Races["Centaur"].name = "Centaur";
 			
 			// create a class Qualities
-			var Qualities = new Object();
 	
-			// create a function to generate all qualities 
-			function CreateQualities() {
+			// a function to generate qualities
+			var Qualities = new Object();	 
+			function CreateQualities() {		
 				// create 1 and 3 point qualities (good and great [attribute])
 				for (var attribute in baseAttributes) {
 					Qualities["Good " + attribute] = new Object();

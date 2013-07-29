@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="jquery-2.0.3.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="characters.css"> </link> 
+
+		<script src="character_editor.js"></script>	
+		
+		<title>
+			Adventurers Online Character Creater
+		</title>
+	</head>
+	<body>
+		<script>
+			Initialize();
+			var name = prompt("Please enter your name: ");
+			var role = prompt("Please enter your role in this group: ");
+			hero = new Hero(name, role);
+			DisplayHero(hero);
+		</script>
+
+		<table border=0>
+		   <tr>
+			<td colspan=2 id='Name'></td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+			<td colspan=2 id='Role'></td>
+		   </tr>
+
+		   <tr>
+			<td>Health</td><td id='Health'>4</td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+		  	<td>Might</td><td id='Might'>2</td>
+		   </tr>
+		   <tr>
+			<td>Stamina</td><td id='Stamina'>2</td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+		  	<td>Will</td><td id='Will'>2</td>
+		   </tr>
+		   <tr>
+			<td>Speed</td><td id='Speed'>4</td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+		  	<td>Awareness</td><td id='Awareness'>2</td>
+		   </tr>
+		   <tr>
+			<td>Defense</td><td id='Defense'>1</td>
+			<td>&nbsp;&nbsp;&nbsp;</td>
+		  	<td>Lore</td><td id='Lore'>2</td>
+		   </tr>
+	</body>
+</html>

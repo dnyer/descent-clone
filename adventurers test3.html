@@ -15,12 +15,25 @@
 		<script>
 			Initialize();
 			var name = prompt("Please enter your name: ");
-			var role = prompt("Please enter your role in this group: ");
-			hero = new Hero(name, role);
+			var hero = new Hero(name, "Fighter");
 		</script>
 		
 		<body onload = "DisplayHero(hero)">
 
+		<table border=0>
+			<tr>
+				<td colspan=2 onclick="UpdateRole(hero, 'Fighter')"><img src="Fighter Class.png" >
+				<td colspan=2 onclick="UpdateRole(hero, 'Barbarian')"><img src="Barbarian Class.png">
+				<td colspan=2 onclick="UpdateRole(hero, 'Ranger')"><img src="Ranger Class.png">
+				<td colspan=2 onclick="UpdateRole(hero, 'Thief')"><img src="Thief Class.png">
+			</tr>
+			<tr>
+				<td colspan=2 onclick="UpdateRole(hero, 'Sorcerer')"><img src="Sorcerer Class.png">
+				<td colspan=2 onclick="UpdateRole(hero, 'Summoner')"><img src="Summoner Class.png">
+				<td colspan=2 onclick="UpdateRole(hero, 'Sage')"><img src="Sage Class.png">
+				<td colspan=2 onclick="UpdateRole(hero, 'Paladin')"><img src="Paladin Class.png">
+			</tr>
+		</table>
 		<table border=0>
 		   <tr>
 			<td colspan=2 id='Heroname'></td>
@@ -48,5 +61,8 @@
 			<td>&nbsp;&nbsp;&nbsp;</td>
 		  	<td>Lore</td><td id='Lore'>2</td>
 		   </tr>
+		   
+		</table>
+<!--		<button type="button" onclick="UpdateInfo()">Update</button> -->
 	</body>
 </html>

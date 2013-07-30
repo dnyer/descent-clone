@@ -27,12 +27,12 @@
 			
 			// when changing roles, update the required attributes hash with this function.
 			function UpdateRequiredAttributes() {
-			
+				
 			}
 			
 			// each time player changes attributes, check that they are still fulfilling required attributes. if not, throw error.
 			function CheckRequiredAttributes() {
-			
+				
 			}
 			
 			
@@ -76,7 +76,7 @@
 				Roles["Sorcerer"] = new Object();
 				Roles["Sorcerer"].name = "Sorcerer";
 				Roles["Sorcerer"].race = "Tiefling";
-				Roles["Sorcerer"].qualities = "Mystical, Agile";
+				Roles["Sorcerer"].qualities = "Brilliant, Nimble";
 				Roles["Sorcerer"].requirements = new Object();
 				Roles["Sorcerer"].requirements["Lore"] = 3;
 				Roles["Sorcerer"].requirements["Stamina"] = 2;
@@ -314,6 +314,13 @@
 				Qualities["Mystical"].attributes["Lore"] = 3;
 								
 				// create 5 point qualities
+				Qualities["Brilliant"] = new Object();
+				Qualities["Brilliant"].name = "Brilliant";
+				Qualities["Brilliant"].cost = 5;
+				Qualities["Brilliant"].attributes = new Object();
+				Qualities["Brilliant"].attributes["Lore"] = 4;
+				Qualities["Brilliant"].attributes["Stamina"] = 4;
+				
 				Qualities["Tough"] = new Object();
 				Qualities["Tough"].name = "Tough";
 				Qualities["Tough"].cost = 5;
@@ -394,10 +401,31 @@
 				}	
 			}
 			
+			//update name function
+			var name = "";
+			function UpdateName(hero, name) {
+				hero.name = name;
+			}
+			
+			//update role function
+			var role="";
+			function UpdateRole(hero, role) {
+				hero.role = Roles[role];
+				hero.race = Races[Roles[role].race];
+				hero.qualities = Roles[role].qualities;
+				UpdateAttributes(hero);
+				DisplayHero(hero);
+			}
+			
+/*			function UpdateInfo() {
+				UpdateName(hero, name);
+				UpdateAttributes(hero);
+				UpdateRole(role);
+			}
+*/			
 			function DisplayHero(hero) {
 				document.getElementById('Heroname').innerHTML = hero.name;
 				document.getElementById('Role').innerHTML = hero.role.name;
-
 				for(attribute in baseAttributes) {
 					var displayArea = document.getElementById(attribute);
 					displayArea.innerHTML = hero.attributes[attribute];

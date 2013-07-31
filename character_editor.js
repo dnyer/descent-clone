@@ -278,7 +278,6 @@
 				Qualities["Strong"].attributes["Stamina"] = 3;
 				
 				Qualities["Quick"] = new Object();
-				
 				Qualities["Quick"].name = "Quick";
 				Qualities["Quick"].cost = 4;
 				Qualities["Quick"].attributes = new Object();

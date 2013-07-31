@@ -40,6 +40,13 @@
 			// a function to generate roles
 			var Roles = new Object();
 			function CreateRoles() {
+			
+				Roles["None"] = new Object();
+				Roles["None"].name = "None";
+				Roles["None"].race = "Human";
+				Roles["None"].qualities = "None";
+				Roles["None"].requirements = new Object();
+				
 				// create a fighter role of object type Roles
 				Roles["Fighter"] = new Object();
 				Roles["Fighter"].name = "Fighter";
@@ -185,13 +192,13 @@
 				Races["Pixie"].name = "Pixie";
 				Races["Pixie"].unflipped = new Object();
 				Races["Pixie"].unflipped.modifier = new Object();
-				Races["Pixie"].unflipped.modifier["Speed"] = "Fly";
+				Races["Pixie"].unflipped.modifier["Speed"] = ", Fly";
 				Races["Pixie"].unflipped.modifier["Stamina"] = +1;
 				Races["Pixie"].unflipped.modifier["Health"] = -1;
 				Races["Pixie"].unflipped.ability = "Flip as a move to teleport up to twice your speed.";
 				Races["Pixie"].flipped = new Object();
 				Races["Pixie"].flipped.modifier = new Object();
-				Races["Pixie"].flipped.modifier["Speed"] = "Fly";
+				Races["Pixie"].flipped.modifier["Speed"] = ", Fly";
 				Races["Pixie"].flipped.modifier["Defense"] = +1;
 				Races["Pixie"].flipped.modifier["Health"] = -1;
 				Races["Pixie"].flipped.ability = "";
@@ -203,14 +210,14 @@
 				Races["Orc"].unflipped.modifier["Health"] = +1;
 				Races["Orc"].unflipped.modifier["Might"] = +1;
 				Races["Orc"].unflipped.modifier["Lore"] = -1;
-				Races["Orc"].unflipped.ability = "Flip after rolling an attack to gain +â˜… and +â™¥â™¥.";
+				Races["Orc"].unflipped.ability = "Flip after rolling an attack to gain +&#9733; and +&#10084;&#10084;";
 				Races["Orc"].flipped = new Object();
 				Races["Orc"].flipped.modifier = new Object();
 				Races["Orc"].flipped.modifier["Health"] = +1;
 				Races["Orc"].flipped.modifier["Might"] = +1;
 				Races["Orc"].flipped.modifier["Lore"] = -1;
 				Races["Orc"].flipped.modifier["Will"] = -1;
-				Races["Orc"].flipped.ability = "Add +â™¥ to all attack rolls.";
+				Races["Orc"].flipped.ability = "Add +&#10084; to all attack rolls.";
 				
 				Races["Tiefling"] = new Object();
 				Races["Tiefling"].name = "Tiefling";
@@ -225,12 +232,18 @@
 				Races["Tiefling"].flipped.modifier["Will"] = +1;
 				Races["Tiefling"].flipped.modifier["Stamina"] = +1;
 				Races["Tiefling"].flipped.modifier["Health"] = -2;
-				Races["Tiefling"].flipped.ability = "Add +â˜… to all attack rolls that do not roll an X.";
+				Races["Tiefling"].flipped.ability = "Add +&#9733; to all attack rolls that do not roll an &#10005;.";
 			}
 	
 			// a function to generate qualities
 			var Qualities = new Object();	 
 			function CreateQualities() {		
+				
+				Qualities["None"] = new Object();
+				Qualities["None"].name = "None";
+				Qualities["None"].cost = 0;
+				Qualities["None"].attributes = new Object();
+				
 				// create 1 and 3 point qualities (good and great [attribute])
 				for (var attribute in baseAttributes) {
 					Qualities["Good " + attribute] = new Object();
@@ -383,6 +396,7 @@
 				 this.qualities = Roles[role].qualities; // assigns it a qualities string (comma separated)
 				 this.buildPoints = 9; // nine build points to spend
 				 this.attributes = new Object();
+				 this.flipped = false; // flipped state of the hero object
 				 UpdateAttributes(this); // this function will be used to update attributes each time player does something. Called once during character creation to update attributes initially.
 			}
 			
@@ -398,37 +412,77 @@
 							hero.attributes[attribute] = Qualities[quality].attributes[attribute];
 						}
 					}
+					if (hero.flipped == true) {
+						if (hero.race.flipped.modifier[attribute]) {
+							hero.attributes[attribute] += hero.race.flipped.modifier[attribute];
+						}
+					}
+					else {
+						if (hero.race.unflipped.modifier[attribute]) {
+							hero.attributes[attribute] += hero.race.unflipped.modifier[attribute];
+						}
+					}	
 				}	
 			}
 			
 			//update name function
 			var name = "";
-			function UpdateName(hero, name) {
-				hero.name = name;
+			function UpdateName(hero) {
+				hero.name = document.getElementById('HeroName').value;
 			}
 			
 			//update role function
 			var role="";
 			function UpdateRole(hero, role) {
+				oldRole = hero.role.name;
 				hero.role = Roles[role];
-				hero.race = Races[Roles[role].race];
-				hero.qualities = Roles[role].qualities;
+				if (oldRole == "None") {
+					hero.race = Races[Roles[role].race];
+					hero.qualities = Roles[role].qualities;
+				}
 				UpdateAttributes(hero);
 				DisplayHero(hero);
 			}
 			
-/*			function UpdateInfo() {
-				UpdateName(hero, name);
+			//update race function
+			var race="";
+			function UpdateRace(hero) {
+				hero.race = Races[document.getElementById('Race').value];
 				UpdateAttributes(hero);
-				UpdateRole(role);
+				DisplayHero(hero);
 			}
-*/			
+			
+			function UpdateQualities(hero, qualities) {
+				
+			}
+	
 			function DisplayHero(hero) {
-				document.getElementById('Heroname').innerHTML = hero.name;
+				document.getElementById('HeroName').value = hero.name;
 				document.getElementById('Role').innerHTML = hero.role.name;
+				document.getElementById('Race').value = hero.race.name;
+				document.getElementById('Qualities').innerHTML = hero.qualities;
+				if (hero.flipped == false) {
+					document.getElementById('Traits Title').innerHTML = "Side 1 Traits";
+					document.getElementById('Ability').innerHTML = hero.race.unflipped.ability;
+				}
+				else {
+					document.getElementById('Traits Title').innerHTML = "Side 2 Traits";
+					document.getElementById('Ability').innerHTML = hero.race.flipped.ability;
+				}
 				for(attribute in baseAttributes) {
 					var displayArea = document.getElementById(attribute);
 					displayArea.innerHTML = hero.attributes[attribute];
+				}
+			}
+			
+			function Flip() {
+				if (hero.flipped == true) {
+					hero.flipped = false;
+					document.getElementById('Flip').innerHTML = "Flip Me!";
+				}
+				else {
+					hero.flipped = true;
+					document.getElementById('Flip').innerHTML = "Unflip Me!";
 				}
 			}
 			

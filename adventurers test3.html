@@ -14,12 +14,11 @@
 	<body>
 		<script>
 			Initialize();
-			var name = prompt("Please enter your name: ");
-			var hero = new Hero(name, "Fighter");
+			var name = "Unnamed Hero";
+			var hero = new Hero(name, "None");
 		</script>
 		
 		<body onload = "DisplayHero(hero)">
-
 		<table border=0>
 			<tr>
 				<td colspan=2 onclick="UpdateRole(hero, 'Fighter')"><img src="Fighter Class.png" >
@@ -34,17 +33,36 @@
 				<td colspan=2 onclick="UpdateRole(hero, 'Paladin')"><img src="Paladin Class.png">
 			</tr>
 		</table>
-		<table border=0>
+		<table border=0 width=300px height=250px>
 		   <tr>
-			<td colspan=2 id='Heroname'></td>
+			<td colspan=3 >
+				<input type="text" size=25 id="HeroName" onchange="UpdateName(hero)">
+			</td>
 			<td>&nbsp;&nbsp;&nbsp;</td>
-			<td colspan=2 id='Role'></td>
+			<td colspan=2 id='Role' align=right></td>
+			</tr>
+			<tr>
+			<td colspan=1>
+				<select id='Race' onchange="UpdateRace(hero)">
+					<option value="Human" selected>Human</option>
+					<option value="Elf">Elf</option>
+					<option value="Dwarf">Dwarf</option>
+					<option value="Orc">Orc</option>
+					<option value="Halfling">Halfling</option>
+					<option value="Centaur">Centaur</option>
+					<option value="Pixie">Pixie</option>
+					<option value="Tiefling">Tiefling</option>
+				</select>
+			</td>
+			<td colspan=4 id='Qualities' align=right></td>
 		   </tr>
-
 		   <tr>
-			<td>Health</td><td id='Health'>4</td>
-			<td>&nbsp;&nbsp;&nbsp;</td>
-		  	<td>Might</td><td id='Might'>2</td>
+		   	<td id='Traits Title' colspan=2>Side 1 Traits</td>
+		   </tr>
+		   <tr>
+			<td width=100px>Health</td><td id='Health' width=45px>4</td>
+			<td width=10px>&nbsp;&nbsp;&nbsp;</td>
+		  	<td width=100px>Might</td><td id='Might' width=45px>2</td>
 		   </tr>
 		   <tr>
 			<td>Stamina</td><td id='Stamina'>2</td>
@@ -61,8 +79,12 @@
 			<td>&nbsp;&nbsp;&nbsp;</td>
 		  	<td>Lore</td><td id='Lore'>2</td>
 		   </tr>
-		   
+		   <tr height=75px>
+		   	<td colspan=5 id='Ability'></td>
+		   </tr>
+		   <tr>
+		   	<td><button type="button" onclick="Flip(); UpdateAttributes(hero); DisplayHero(hero)" id="Flip">Flip me!</button>
 		</table>
-<!--		<button type="button" onclick="UpdateInfo()">Update</button> -->
+		<br>
 	</body>
 </html>

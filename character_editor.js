@@ -451,8 +451,20 @@
 				DisplayHero(hero);
 			}
 			
-			function UpdateQualities(hero, qualities) {
-				
+			//add or remove a quality from list of qualities based on the change of the checked box
+			//
+			function UpdateQuality(hero) {
+				for (quality in Qualities) {
+					if ($(document.getElementById(Qualities[quality].name)).is(':checked')) {
+						for (attribute in Qualities[quality].attributes) {
+							if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) {
+								hero.attributes[attribute] = Qualities[quality].attributes[attribute];
+							}
+						}
+					}
+					UpdateAttributes(hero);
+				}
+				DisplayHero(hero);
 			}
 	
 			function DisplayHero(hero) {

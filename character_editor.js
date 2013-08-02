@@ -26,8 +26,16 @@
 			}
 			
 			// when changing roles, update the required attributes hash with this function.
-			function UpdateRequiredAttributes() {
-				
+			function UpdateRequiredAttributes(role) {
+				for (attribute in requiredAttributes) {
+					if (hero.role.requirements[attribute]) {
+						requiredAttributes[attribute] = hero.role.requirements[attribute];
+					}
+					else {
+						requiredAttributes[attribute] = 0;
+					}
+					console.log(attribute + " " + requiredAttributes[attribute]); //debugging stuff
+				}	
 			}
 			
 			// each time player changes attributes, check that they are still fulfilling required attributes. if not, throw error.
@@ -438,8 +446,10 @@
 				if (oldRole == "None") {
 					hero.race = Races[Roles[role].race];
 					hero.qualities = Roles[role].qualities;
+					ReadQualities(hero);
 				}
 				UpdateAttributes(hero);
+				UpdateRequiredAttributes(hero, role);
 				DisplayHero(hero);
 			}
 			
@@ -451,14 +461,93 @@
 				DisplayHero(hero);
 			}
 			
+			function ReadQualities(hero) {
+				for(quality in Qualities) { // clear all qualities
+					document.getElementById(quality).checked = false;
+					EnableQuality(quality);
+				}
+				hero.buildPoints = 9;
+				qualitiesArray = hero.qualities.split(", ");
+				for (i=0; i<qualitiesArray.length; i++) {
+				    var quality = qualitiesArray[i];
+				    document.getElementById(quality).checked = true;
+				    UpdateBuildPoints(hero, quality);
+				}
+
+			}
+			
+			function EnableQuality(quality) {
+				document.getElementById(quality).disabled = false;
+				document.getElementById(quality).parentNode.setAttribute("style", "color:black");
+			}
+			
+			function DisableQuality(quality) {
+				document.getElementById(quality).disabled = true;
+				document.getElementById(quality).parentNode.setAttribute("style", "color:#A0A0A0");
+			}
+						
+			function UpdateBuildPoints(hero, id) {
+				if(id != "None") {
+					document.getElementById("None").checked=false;
+				}
+				if (document.getElementById(id).checked) {
+					hero.buildPoints -= Qualities[id].cost;
+				}
+				else {
+					hero.buildPoints += Qualities[id].cost;
+				}
+				for (quality in Qualities) {
+					if (document.getElementById(quality).checked == false) {
+						if (Qualities[quality].cost <= hero.buildPoints) {
+							EnableQuality(quality);
+						}
+						else {
+							DisableQuality(quality);
+						}
+					}
+				}
+				console.log(hero.buildPoints + " buildpoints remaining");
+			}
 			function PrintQuality(id) {
 				console.log(document.getElementById(id).checked);
 				
 			}
-			function UpdateQualities(hero, qualities) {
-				
+			function UpdateQualities(hero) {
+				if (document.getElementById("None").checked==true) {
+					hero.qualities = "None";
+				}
+				else {				
+					hero.qualities = "";
+					for (quality in Qualities) {
+						if (document.getElementById(quality).checked==true) {
+							if(hero.qualities != "") {
+								hero.qualities += ", ";
+							}
+							hero.qualities += quality;
+						}
+					}
+				}
+				if(hero.qualities == "") {
+					hero.qualities = "None";
+				}
+				UpdateAttributes(hero);
+				DisplayHero(hero);
 			}
-	
+				//need to figure out how to uncheck "none" when it's the only checked box and you check a different trait
+				// make "None" a button!
+			function ClearQualities(hero) {
+				if(document.getElementById("None").checked) {
+					for (quality in Qualities) {
+						console.log(quality);
+						if (document.getElementById(quality).checked && quality != "None") {
+							document.getElementById(quality).checked = false;
+							hero.buildPoints += Qualities[quality].cost;
+						}
+					}
+				}
+			}
+			
+			//todo: make displayhero also update the qualities checkboxes from the qualities string.
 			function DisplayHero(hero) {
 				document.getElementById('HeroName').value = hero.name;
 				document.getElementById('Role').innerHTML = hero.role.name;

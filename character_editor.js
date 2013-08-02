@@ -451,13 +451,9 @@
 				DisplayHero(hero);
 			}
 			
-			function ToggleCheckedAttribute(name) {
-				if document.getElementsByName(name).checked {
-					document.getElementsByName(name).removeAttribute("checked");
-				}
-				else {
-					document.getElementsByName(name).setAttribute("checked");
-				}
+			function PrintQuality(id) {
+				console.log(document.getElementById(id).checked);
+				
 			}
 			function UpdateQualities(hero, qualities) {
 				

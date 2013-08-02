@@ -453,12 +453,22 @@
 				DisplayHero(hero);
 			}
 			
+			function SwitchCheck(id) {
+				if (document.getElementById(id).checked) {
+					document.getElementById(id).removeAttribute("checked");
+					}
+				else {
+					document.getElementById(id).setAttribute("checked", "yes");
+					}
+			}
 			//add or remove a quality from list of qualities based on the change of the checked box
 			//
 			function UpdateQuality(hero) {
 				for (quality in Qualities) {
-					alert(Qualities[quality].name + "\n" + document.getElementById(Qualities[quality].id));
-					if (document.getElementById(Qualities[quality].id).checked==true) {
+					console.log(document.getElementById(Qualities[quality].id).attr(id));
+					qualityId = document.getElementById(Qualities[quality].name).id;
+					console.log(qualityId);
+					if (document.getElementById(qualityId).checked) {
 						for (attribute in Qualities[quality].attributes) {
 							if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) {
 								hero.attributes[attribute] = Qualities[quality].attributes[attribute];

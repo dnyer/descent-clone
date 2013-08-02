@@ -89,59 +89,58 @@
 		<form>
 			<table>
 				<tr>
-					<td><input type="checkbox" name="quality" id="GoodMight" value="Good Might" onchange="UpdateQuality(hero)">Good Might</td>
-					<td><input type="checkbox" name="quality" id="Good Will" value="Good WiLL">Good Will</td>
-					<td><input type="checkbox" name="quality" id="Good Awareness" value="Good Awareness">Good Awareness</td>
+					<td><input type="checkbox" name="quality" id="GoodMight" value="Good Might" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Might</td>
+					<td><input type="checkbox" name="quality" id="GoodWill" value="Good Will" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Will</td>
+					<td><input type="checkbox" name="quality" id="GoodAwareness" value="Good Awareness" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Awareness</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Good Lore" value="Good Lore">Good Lore</td>
-					<td><input type="checkbox" name="quality" id="Good Health" value="Good Health">Good Health</td>
-					<td><input type="checkbox" name="quality" id="Good Stamina" value="Good Stamina">Good Stamina</td>
+					<td><input type="checkbox" name="quality" id="GoodLore" value="Good Lore" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Lore</td>
+					<td><input type="checkbox" name="quality" id="GoodHealth" value="Good Health" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Health</td>
+					<td><input type="checkbox" name="quality" id="GoodStamina" value="Good Stamina" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Stamina</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Good Defense" value="Good Defense">Good Defense</td>
-					<td><input type="checkbox" name="quality" id="Good Speed" value="Good Speed">Good Speed</td>
-					<td><input type="checkbox" name="quality" id="Great Might" value="Great Might">Great Might</td>
+					<td><input type="checkbox" name="quality" id="GoodDefense" value="Good Defense" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Defense</td>
+					<td><input type="checkbox" name="quality" id="GoodSpeed" value="Good Speed" onchange="SwitchCheck(id); UpdateQuality(hero)">Good Speed</td>
+					<td><input type="checkbox" name="quality" id="GreatMight" value="Great Might" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Might</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Great Will" value="Great Will">Great Will</td>
-					<td><input type="checkbox" name="quality" id="Great Awareness" value="Great Awareness">Great Awareness</td>
-					<td><input type="checkbox" name="quality" id="Great Lore" value="Great Lore">Great Lore</td>
+					<td><input type="checkbox" name="quality" id="GreatWill" value="Great Will" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Will</td>
+					<td><input type="checkbox" name="quality" id="GreatAwareness" value="Great Awareness" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Awareness</td>
+					<td><input type="checkbox" name="quality" id="GreatLore" value="Great Lore" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Lore</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Great Health" value="Great Health">Great Health</td>
-					<td><input type="checkbox" name="quality" id="Great Stamina" value="Great Stamina">Great Stamina</td>
-					<td><input type="checkbox" name="quality" id="Great Defense" value="Great Defense">Great Defense</td>
+					<td><input type="checkbox" name="quality" id="GreatHealth" value="Great Health" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Health</td>
+					<td><input type="checkbox" name="quality" id="GreatStamina" value="Great Stamina" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Stamina</td>
+					<td><input type="checkbox" name="quality" id="GreatDefense" value="Great Defense" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Defense</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Great Speed" value="Great Speed">Great Speed</td>
-					<td><input type="checkbox" name="quality" id="Rugged" value="Rugged">Rugged</td>
-					<td><input type="checkbox" name="quality" id="Strong" value="Strong">Strong</td>
+					<td><input type="checkbox" name="quality" id="GreatSpeed" value="Great Speed" onchange="SwitchCheck(id); UpdateQuality(hero)">Great Speed</td>
+					<td><input type="checkbox" name="quality" id="Rugged" value="Rugged" onchange="SwitchCheck(id); UpdateQuality(hero)">Rugged</td>
+					<td><input type="checkbox" name="quality" id="Strong" value="Strong" onchange="SwitchCheck(id); UpdateQuality(hero)">Strong</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Quick" value="Quick">Quick</td>
-					<td><input type="checkbox" name="quality" id="Alert" value="Alert">Alert</td>
-					<td><input type="checkbox" name="quality" id="Nimble" value="Nimble">Nimble</td>
+					<td><input type="checkbox" name="quality" id="Quick" value="Quick" onchange="SwitchCheck(id); UpdateQuality(hero)">Quick</td>
+					<td><input type="checkbox" name="quality" id="Alert" value="Alert" onchange="SwitchCheck(id); UpdateQuality(hero)">Alert</td>
+					<td><input type="checkbox" name="quality" id="Nimble" value="Nimble" onchange="SwitchCheck(id); UpdateQuality(hero)">Nimble</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Stubborn" value="Stubborn">Stubborn</td>
-					<td><input type="checkbox" name="quality" id="Educated" value="Educated">Educated</td>
-					<td><input type="checkbox" name="quality" value="Mystical">Mystical</td>
+					<td><input type="checkbox" name="quality" id="Stubborn" value="Stubborn" onchange="SwitchCheck(id); UpdateQuality(hero)">Stubborn</td>
+					<td><input type="checkbox" name="quality" id="Educated" value="Educated" onchange="SwitchCheck(id); UpdateQuality(hero)">Educated</td>
+					<td><input type="checkbox" name="quality" value="Mystical" onchange="SwitchCheck(id); UpdateQuality(hero)">Mystical</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Brilliant" value="Brilliant">Brilliant</td>
-					<td><input type="checkbox" name="quality" id="Tough" value="Tough">Tough</td>
-					<td><input type="checkbox" name="quality" id="Swift" value="Swift">Swift</td>
+					<td><input type="checkbox" name="quality" id="Brilliant" value="Brilliant" onchange="SwitchCheck(id); UpdateQuality(hero)">Brilliant</td>
+					<td><input type="checkbox" name="quality" id="Tough" value="Tough" onchange="SwitchCheck(id); UpdateQuality(hero)">Tough</td>
+					<td><input type="checkbox" name="quality" id="Swift" value="Swift" onchange="SwitchCheck(id); UpdateQuality(hero)">Swift</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Wary" value="Wary">Wary</td>
-					<td><input type="checkbox" name="quality" id="Agile" value="Agile">Agile</td>
-					<td><input type="checkbox" name="quality" id="Inspired" value="Inspired">Inspired</td>
+					<td><input type="checkbox" name="quality" id="Wary" value="Wary" onchange="SwitchCheck(id); UpdateQuality(hero)">Wary</td>
+					<td><input type="checkbox" name="quality" id="Agile" value="Agile" onchange="SwitchCheck(id); UpdateQuality(hero)">Agile</td>
+					<td><input type="checkbox" name="quality" id="Inspired" value="Inspired" onchange="SwitchCheck(id); UpdateQuality(hero)">Inspired</td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" name="quality" id="Wise" value="Wise">Wise</td>
-					<td><input type="checkbox" name="quality" value=""></td>
-					<td><input type="checkbox" name="quality" id="None" value="None">None</td>
+					<td><input type="checkbox" name="quality" id="Wise" value="Wise" onchange="SwitchCheck(id); UpdateQuality(hero)">Wise</td>
+					<td><input type="checkbox" name="quality" id="None" value="None" onchange="SwitchCheck(id); UpdateQuality(hero)">None</td>
 				</tr>
 			</table>
 		</form>

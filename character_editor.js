@@ -248,7 +248,6 @@
 				for (var attribute in baseAttributes) {
 					Qualities["Good " + attribute] = new Object();
 					Qualities["Good " + attribute].name = "Good " + attribute;
-					Qualities["Good " + attribute].id = "Good" + attribute;
 					Qualities["Good " + attribute].cost = 1;
 					Qualities["Good " + attribute].attributes = new Object();
 					Qualities["Good " + attribute].attributes[attribute] = 	
@@ -256,7 +255,6 @@
 
 					Qualities["Great " + attribute] = new Object();
 					Qualities["Great " + attribute].name = "Great " + attribute;
-					Qualities["Great " + attribute].id = "Great" + attribute;
 					Qualities["Great " + attribute].cost = 3;
 					Qualities["Great " + attribute].attributes = new Object();
 					Qualities["Great " + attribute].attributes[attribute] =
@@ -457,16 +455,12 @@
 			//
 			function UpdateQuality(hero) {
 				for (quality in Qualities) {
-					alert(Qualities[quality].name + "\n" + document.getElementById(Qualities[quality].id));
-					if (document.getElementById(Qualities[quality].id).checked==true) {
+					if ($(document.getElementById(Qualities[quality].name)).is(':checked')) {
 						for (attribute in Qualities[quality].attributes) {
 							if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) {
 								hero.attributes[attribute] = Qualities[quality].attributes[attribute];
 							}
 						}
-						alert("!");
-					}
-					else {
 					}
 					UpdateAttributes(hero);
 				}

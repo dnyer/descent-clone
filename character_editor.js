@@ -1,5 +1,6 @@
-			// the base attributes every character begins with. Treat this hash as a constant. Populate hero objects with this hash.
+/*Here we go! This is the javascript file for the Adventurers Character Creator page.*/
 
+			// the base attributes every character begins with. Treat this hash as a constant. Populate hero objects with this hash.
 			var baseAttributes = new Object();
 			function CreateBaseAttributes() {
 				baseAttributes['Might']=2;
@@ -24,27 +25,7 @@
 				requiredAttributes['Defense']=0;
 				requiredAttributes['Speed']=0;
 			}
-			
-			// when changing roles, update the required attributes hash with this function.
-			function UpdateRequiredAttributes(role) {
-				for (attribute in requiredAttributes) {
-					if (hero.role.requirements[attribute]) {
-						requiredAttributes[attribute] = hero.role.requirements[attribute];
-					}
-					else {
-						requiredAttributes[attribute] = 0;
-					}
-					console.log(attribute + " " + requiredAttributes[attribute]); //debugging stuff
-				}	
-			}
-			
-			// each time player changes attributes, check that they are still fulfilling required attributes. if not, throw error.
-			function CheckRequiredAttributes() {
-				
-			}
-			
-			
-			
+						
 			// a function to generate roles
 			var Roles = new Object();
 			function CreateRoles() {
@@ -429,7 +410,8 @@
 							hero.attributes[attribute] += hero.race.unflipped.modifier[attribute];
 						}
 					}	
-				}	
+				}
+				CheckRequiredAttributes(hero);	
 			}
 			
 			//update name function
@@ -448,8 +430,8 @@
 					hero.qualities = Roles[role].qualities;
 					ReadQualities(hero);
 				}
-				UpdateAttributes(hero);
 				UpdateRequiredAttributes(hero, role);
+				UpdateAttributes(hero);
 				DisplayHero(hero);
 			}
 			
@@ -457,6 +439,28 @@
 			var race="";
 			function UpdateRace(hero) {
 				hero.race = Races[document.getElementById('Race').value];
+				UpdateAttributes(hero);
+				DisplayHero(hero);
+			}
+			
+			function UpdateQualities(hero) {
+				if (document.getElementById("None").checked==true) {
+					hero.qualities = "None";
+				}
+				else {				
+					hero.qualities = "";
+					for (quality in Qualities) {
+						if (document.getElementById(quality).checked==true) {
+							if(hero.qualities != "") {
+								hero.qualities += ", ";
+							}
+							hero.qualities += quality;
+						}
+					}
+				}
+				if(hero.qualities == "") {
+					hero.qualities = "None";
+				}
 				UpdateAttributes(hero);
 				DisplayHero(hero);
 			}
@@ -506,35 +510,33 @@
 						}
 					}
 				}
-				console.log(hero.buildPoints + " buildpoints remaining");
 			}
-			function PrintQuality(id) {
-				console.log(document.getElementById(id).checked);
-				
+
+
+			// when changing roles, update the required attributes hash with this function.
+			function UpdateRequiredAttributes(role) {
+				for (attribute in requiredAttributes) {
+					if (hero.role.requirements[attribute]) {
+						requiredAttributes[attribute] = hero.role.requirements[attribute];
+					}
+					else {
+						requiredAttributes[attribute] = 0;
+					}
+					console.log(attribute + " " + requiredAttributes[attribute]); //debugging stuff
+				}	
 			}
-			function UpdateQualities(hero) {
-				if (document.getElementById("None").checked==true) {
-					hero.qualities = "None";
-				}
-				else {				
-					hero.qualities = "";
-					for (quality in Qualities) {
-						if (document.getElementById(quality).checked==true) {
-							if(hero.qualities != "") {
-								hero.qualities += ", ";
-							}
-							hero.qualities += quality;
-						}
+			
+			// each time player changes attributes, check that they are still fulfilling required attributes. if not, throw error.
+			function CheckRequiredAttributes(hero) {
+				for (attribute in requiredAttributes) {
+					if (hero.attributes[attribute] < requiredAttributes[attribute]) {
+						document.getElementById(attribute).setAttribute("style", "color:red");
+					}
+					else {document.getElementById(attribute).setAttribute("style", "color:black");
 					}
 				}
-				if(hero.qualities == "") {
-					hero.qualities = "None";
-				}
-				UpdateAttributes(hero);
-				DisplayHero(hero);
 			}
-				//need to figure out how to uncheck "none" when it's the only checked box and you check a different trait
-				// make "None" a button!
+			
 			function ClearQualities(hero) {
 				if(document.getElementById("None").checked) {
 					for (quality in Qualities) {
@@ -546,13 +548,12 @@
 					}
 				}
 			}
-			
-			//todo: make displayhero also update the qualities checkboxes from the qualities string.
+
 			function DisplayHero(hero) {
 				document.getElementById('HeroName').value = hero.name;
 				document.getElementById('Role').innerHTML = hero.role.name;
 				document.getElementById('Race').value = hero.race.name;
-				document.getElementById('Qualities').innerHTML = hero.qualities;
+				document.getElementById('Hero Qualities').innerHTML = hero.qualities;
 				if (hero.flipped == false) {
 					document.getElementById('Traits Title').innerHTML = "Side 1 Traits";
 					document.getElementById('Ability').innerHTML = hero.race.unflipped.ability;
@@ -561,6 +562,7 @@
 					document.getElementById('Traits Title').innerHTML = "Side 2 Traits";
 					document.getElementById('Ability').innerHTML = hero.race.flipped.ability;
 				}
+				document.getElementById('Build Points').innerHTML = hero.buildPoints;
 				for(attribute in baseAttributes) {
 					var displayArea = document.getElementById(attribute);
 					displayArea.innerHTML = hero.attributes[attribute];

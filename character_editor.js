@@ -13,7 +13,7 @@
 				baseAttributes['Speed']=4;
 			}
 			
-			// the minimum required attributes for a hero to exist. When updating attributes, compare against hero's attributes. If hero's attributes < any value in this hash, prevent player from creating character.
+			// the minimum required attributes for a hero to exist. Update when hero changes roles using the UpdateRequiredAttributes function. When updating attributes, if hero's attributes < any value in this hash, prevent player from creating character and highlight problem.
 			var requiredAttributes = new Object();
 			function CreateRequiredAttributes() {
 				requiredAttributes['Might']=0;
@@ -109,9 +109,9 @@
 				// create a human race of object type Races
 				Races["Human"] = new Object();
 				Races["Human"].name = "Human";
-				Races["Human"].unflipped = new Object();
+				Races["Human"].unflipped = new Object(); // create an unflipped object
 				Races["Human"].unflipped.modifier = new Object();
-				Races["Human"].unflipped.modifier["Will"] = +1;
+				Races["Human"].unflipped.modifier["Will"] = +1;//modifier to attribute Will
 				Races["Human"].unflipped.ability = "Flip to reroll 1 or more dice in 1 attack or test.";
 				Races["Human"].flipped = new Object();
 				Races["Human"].flipped.modifier = new Object();
@@ -227,7 +227,7 @@
 			// a function to generate qualities
 			var Qualities = new Object();	 
 			function CreateQualities() {		
-				
+				//Each quality contains a name string, a cost number, and an attributes hash.
 				Qualities["None"] = new Object();
 				Qualities["None"].name = "None";
 				Qualities["None"].cost = 0;
@@ -365,7 +365,8 @@
 				Qualities["Wise"].attributes["Will"] = 4;
 				
 			}
-
+			
+			// Initialize function called in body script, before html loads, to create necessary variables before creating the hero
 			function Initialize() {
 				CreateBaseAttributes();
 				CreateRequiredAttributes();
@@ -385,128 +386,133 @@
 				 this.buildPoints = 9; // nine build points to spend
 				 this.attributes = new Object();
 				 this.flipped = false; // flipped state of the hero object
-				 UpdateAttributes(this); // this function will be used to update attributes each time player does something. Called once during character creation to update attributes initially.
+				 UpdateAttributes(this); // this function updates attributes each time player does something. Called once during character creation to update attributes initially.
 			}
 			
-			//update attributes function
-			var qualitiesArray = new Array();
+			// update attributes function. Updates the attributes in the hero object.
+			var qualitiesArray = new Array(); // array to store the individual qualities in the hero.qualities string
 			function UpdateAttributes(hero) {
-				qualitiesArray = hero.qualities.split(", ");
+				qualitiesArray = hero.qualities.split(", "); // split up the string, store in the array
 				for(attribute in baseAttributes) {
-					hero.attributes[attribute]=baseAttributes[attribute];
-					for (i=0; i<qualitiesArray.length; i++) {
-					    var quality = qualitiesArray[i];
-						if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) {
-							hero.attributes[attribute] = Qualities[quality].attributes[attribute];
+					hero.attributes[attribute]=baseAttributes[attribute]; // assign the hero's attributes the base attributes
+					for (i=0; i<qualitiesArray.length; i++) { // for each quality in the array
+					    var quality = qualitiesArray[i]; // set quality to that value
+						if (Qualities[quality].attributes[attribute] > hero.attributes[attribute]) { // if that quality's modifier is higher than hero's attribute
+							hero.attributes[attribute] = Qualities[quality].attributes[attribute]; // set hero's attribute to that quality's modifier
 						}
 					}
-					if (hero.flipped == true) {
-						if (hero.race.flipped.modifier[attribute]) {
-							hero.attributes[attribute] += hero.race.flipped.modifier[attribute];
+					if (hero.flipped == true) { // if the hero is flipped
+						if (hero.race.flipped.modifier[attribute]) { // and there's a race modifier for the attribute while flipped
+							hero.attributes[attribute] += hero.race.flipped.modifier[attribute]; // add that modifier to the attribute
 						}
 					}
-					else {
-						if (hero.race.unflipped.modifier[attribute]) {
-							hero.attributes[attribute] += hero.race.unflipped.modifier[attribute];
+					else { // if hero is unflipped
+						if (hero.race.unflipped.modifier[attribute]) { // and there's a race modifier for the attribute while unflipped
+							hero.attributes[attribute] += hero.race.unflipped.modifier[attribute]; // add that modifier to the attribute
 						}
 					}	
 				}
-				CheckRequiredAttributes(hero);	
+				CheckRequiredAttributes(hero);	// see if any of the required attributes are lacking, highlight them
 			}
 			
-			//update name function
+			// update name function
 			var name = "";
 			function UpdateName(hero) {
-				hero.name = document.getElementById('HeroName').value;
+				hero.name = document.getElementById('HeroName').value; // set hero's name to the value player entered in the heroname box
 			}
 			
-			//update role function
+			// update role function
 			var role="";
 			function UpdateRole(hero, role) {
 				oldRole = hero.role.name;
 				hero.role = Roles[role];
-				if (oldRole == "None") {
-					hero.race = Races[Roles[role].race];
-					hero.qualities = Roles[role].qualities;
-					ReadQualities(hero);
+				if (oldRole == "None") { // if this is the first time role is selected
+					hero.race = Races[Roles[role].race]; // assign hero the preferred race
+					hero.qualities = Roles[role].qualities; // assign hero the preferred qualities
+					ReadQualities(hero); // check the appropriate checkboxes
 				}
-				UpdateRequiredAttributes(hero, role);
+				UpdateRequiredAttributes(hero, role); // updates the required attributes for the chosen role
 				UpdateAttributes(hero);
 				DisplayHero(hero);
 			}
 			
-			//update race function
+			// update race function
 			var race="";
 			function UpdateRace(hero) {
-				hero.race = Races[document.getElementById('Race').value];
+				hero.race = Races[document.getElementById('Race').value]; // assigns hero the race selected by the dropdown box
 				UpdateAttributes(hero);
 				DisplayHero(hero);
 			}
 			
+			// updates the hero.qualities string based on checked qualities boxes
 			function UpdateQualities(hero) {
-				if (document.getElementById("None").checked==true) {
+				if (document.getElementById("None").checked==true) { // if the "none" box is checked, set hero.qualities to "none"
 					hero.qualities = "None";
 				}
-				else {				
+				else {		//otherwise set the qualities to blank		
 					hero.qualities = "";
-					for (quality in Qualities) {
-						if (document.getElementById(quality).checked==true) {
-							if(hero.qualities != "") {
-								hero.qualities += ", ";
+					for (quality in Qualities) { // for each quality in the list
+						if (document.getElementById(quality).checked==true) { // if its box is checked
+							if(hero.qualities != "") { // if string isn't blank
+								hero.qualities += ", "; // add a comma space
 							}
-							hero.qualities += quality;
+							hero.qualities += quality; // add the quality
 						}
 					}
 				}
-				if(hero.qualities == "") {
-					hero.qualities = "None";
+				if(hero.qualities == "") { // if the hero.qualities string is still blank
+					hero.qualities = "None"; // set to none
 				}
 				UpdateAttributes(hero);
 				DisplayHero(hero);
 			}
 			
+			// updates the qualities checkboxes based on the hero.qualities string
 			function ReadQualities(hero) {
 				for(quality in Qualities) { // clear all qualities
 					document.getElementById(quality).checked = false;
 					EnableQuality(quality);
 				}
-				hero.buildPoints = 9;
-				qualitiesArray = hero.qualities.split(", ");
-				for (i=0; i<qualitiesArray.length; i++) {
-				    var quality = qualitiesArray[i];
-				    document.getElementById(quality).checked = true;
-				    UpdateBuildPoints(hero, quality);
+				hero.buildPoints = 9; // set buildPoints to full points
+				qualitiesArray = hero.qualities.split(", "); //split up the qualities into an array
+				for (i=0; i<qualitiesArray.length; i++) { // for each quality
+				    var quality = qualitiesArray[i]; // set var quality to the quality in the array
+				    document.getElementById(quality).checked = true; // check that box
+				    UpdateBuildPoints(hero, quality); // update the build points to reflect change
 				}
 
 			}
 			
+			// makes a quality checkbox able to be checked
 			function EnableQuality(quality) {
 				document.getElementById(quality).disabled = false;
 				document.getElementById(quality).parentNode.setAttribute("style", "color:black");
 			}
 			
+			// makes a quality checkbox unable to be checked
 			function DisableQuality(quality) {
 				document.getElementById(quality).disabled = true;
 				document.getElementById(quality).parentNode.setAttribute("style", "color:#A0A0A0");
 			}
-						
+			
+			// update number of available build points when a box is checked or unchecked		
 			function UpdateBuildPoints(hero, id) {
-				if(id != "None") {
-					document.getElementById("None").checked=false;
+				if(id != "None") { // if the id is something other than none
+					document.getElementById("None").checked=false; // uncheck "none"
 				}
-				if (document.getElementById(id).checked) {
-					hero.buildPoints -= Qualities[id].cost;
+				if (document.getElementById(id).checked) { // if it's been checked
+					hero.buildPoints -= Qualities[id].cost; // subtract cost from buildpoints
 				}
 				else {
-					hero.buildPoints += Qualities[id].cost;
+					hero.buildPoints += Qualities[id].cost; // otherwise add cost to buildpoints
 				}
-				for (quality in Qualities) {
-					if (document.getElementById(quality).checked == false) {
-						if (Qualities[quality].cost <= hero.buildPoints) {
-							EnableQuality(quality);
+				for (quality in Qualities) { // for each quality
+					if (document.getElementById(quality).checked == false) { // if it hasn't been checked
+						if (Qualities[quality].cost <= hero.buildPoints) { // if its cost is less than or equal to number of available build points
+							EnableQuality(quality); // make it clickable
 						}
-						else {
-							DisableQuality(quality);
+						else { // if player can't purchase that quality (not enough buildpoints)
+							DisableQuality(quality); // make it unclickable, greyed out
 						}
 					}
 				}
@@ -515,60 +521,61 @@
 
 			// when changing roles, update the required attributes hash with this function.
 			function UpdateRequiredAttributes(role) {
-				for (attribute in requiredAttributes) {
-					if (hero.role.requirements[attribute]) {
-						requiredAttributes[attribute] = hero.role.requirements[attribute];
+				for (attribute in requiredAttributes) { // for each attribute
+					if (hero.role.requirements[attribute]) { // if the hero's chosen role has a requirement related to that attribute
+						requiredAttributes[attribute] =  hero.role.requirements[attribute]; // set the requirement to that value
 					}
 					else {
-						requiredAttributes[attribute] = 0;
+						requiredAttributes[attribute] = 0; // otherwise set to 0 (to undo previous role choices)
 					}
-					console.log(attribute + " " + requiredAttributes[attribute]); //debugging stuff
 				}	
 			}
 			
-			// each time player changes attributes, check that they are still fulfilling required attributes. if not, throw error.
+			// each time player changes attributes, check that they are still fulfilling required attributes. if not, change color of that attribute to alert player they need to choose different attributes, race or role.
 			function CheckRequiredAttributes(hero) {
 				for (attribute in requiredAttributes) {
-					if (hero.attributes[attribute] < requiredAttributes[attribute]) {
-						document.getElementById(attribute).setAttribute("style", "color:red");
+					if (hero.attributes[attribute] < requiredAttributes[attribute]) { // if a hero's attribute is lower than the required amount
+						document.getElementById(attribute).setAttribute("style", "color:red"); // set color of that attribute to red
 					}
-					else {document.getElementById(attribute).setAttribute("style", "color:black");
+					else {document.getElementById(attribute).setAttribute("style", "color:black"); // otherwise set color to black
 					}
 				}
 			}
 			
+			// uncheck all quantities
 			function ClearQualities(hero) {
-				if(document.getElementById("None").checked) {
+				if(document.getElementById("None").checked) { // if the "none" checkbox has been selected
 					for (quality in Qualities) {
-						console.log(quality);
-						if (document.getElementById(quality).checked && quality != "None") {
-							document.getElementById(quality).checked = false;
-							hero.buildPoints += Qualities[quality].cost;
+						if (document.getElementById(quality).checked && quality != "None") { // if a quality has been checked and isn't "none"
+							document.getElementById(quality).checked = false; // uncheck it
+							hero.buildPoints += Qualities[quality].cost; // add its cost to the hero's buildpoints
 						}
 					}
 				}
 			}
 
+			// updates the HTML page to reflect hero object's variables
 			function DisplayHero(hero) {
 				document.getElementById('HeroName').value = hero.name;
 				document.getElementById('Role').innerHTML = hero.role.name;
 				document.getElementById('Race').value = hero.race.name;
 				document.getElementById('Hero Qualities').innerHTML = hero.qualities;
-				if (hero.flipped == false) {
+				if (hero.flipped == false) { // if hero is unflipped, change the traits title and display of the hero's race ability to unflipped
 					document.getElementById('Traits Title').innerHTML = "Side 1 Traits";
 					document.getElementById('Ability').innerHTML = hero.race.unflipped.ability;
 				}
-				else {
+				else { // otherwise change display of hero's race ability to flipped
 					document.getElementById('Traits Title').innerHTML = "Side 2 Traits";
 					document.getElementById('Ability').innerHTML = hero.race.flipped.ability;
 				}
-				document.getElementById('Build Points').innerHTML = hero.buildPoints;
-				for(attribute in baseAttributes) {
+				document.getElementById('Build Points').innerHTML = hero.buildPoints; // display build points
+				for(attribute in baseAttributes) { // for each attribute
 					var displayArea = document.getElementById(attribute);
-					displayArea.innerHTML = hero.attributes[attribute];
+					displayArea.innerHTML = hero.attributes[attribute]; // put hero's attribute in the correct field
 				}
 			}
 			
+			// flips hero's state on button press
 			function Flip() {
 				if (hero.flipped == true) {
 					hero.flipped = false;

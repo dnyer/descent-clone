@@ -12,13 +12,13 @@
 		</title>
 	</head>
 	<body>
-		<script>
+		<script> //create the necessary variables
 			Initialize();
 			var hero;
 		</script>
 		
-		<body onload = "hero = new Hero('Unnamed Hero', 'None'); DisplayHero(hero)">
-		<table border=0>
+		<body onload = "hero = new Hero('Unnamed Hero', 'None'); DisplayHero(hero)"><!-- when HTML loads, create new hero object, display in HTML-->
+		<table border=0><!-- Table for the class icons-->
 			<tr>
 				<td colspan=2 onclick="UpdateRole(hero, 'Fighter')"><img src="Fighter Class.png" >
 				<td colspan=2 onclick="UpdateRole(hero, 'Barbarian')"><img src="Barbarian Class.png">
@@ -31,7 +31,7 @@
 				<td colspan=2 onclick="UpdateRole(hero, 'Sage')"><img src="Sage Class.png">
 				<td colspan=2 onclick="UpdateRole(hero, 'Paladin')"><img src="Paladin Class.png">
 			</tr>
-		</table>
+		</table><!--Hero traits: name, role, race, qualities, side, attributes-->
 		<table border=0 width=300px height=250px>
 		   <tr>
 			<td colspan=3 >
@@ -86,7 +86,7 @@
 		</table>
 		<br>
 		<form>
-			<table id="Qualities">
+			<table id="Qualities"><!--Qualities checkboxes, with available build points at top-->
 				<tr>
 					<td>Build Points:</td>
 					<td id="Build Points"></td>

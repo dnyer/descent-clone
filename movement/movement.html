@@ -11,14 +11,10 @@
 			Initialize();
 			var hero;
 		</script>
-		<body onLoad = "hero = new Hero('Steve', 'None'); DisplaySpeedAndAwareness()">
-				<p>Map Size</p>
-		<select id='Map Size' onchange='ChangeMapSize()'>
-			<option value="36">6x6</option>
-			<option value="64">8x8</option>
-			<option value="100">10x10</option>
-			<option value="144">12x12</option>
-		</select>
+		<body onLoad = "hero = new Hero('Steve', 'None'); DisplaySpeedAndAwareness(); CreateMap(mapRows, mapColumns)">
+		<p>Map Size</p>
+		<input type="text" size="10" id="MapRows" onchange="ChangeMapRows()"> Rows</input>
+		<input type="text" size="10" id="MapColumns" onchange="ChangeMapColumns()"> Columns</input>
 		<br>
 		<br>
 		<input type="text" size=10 id="HeroSpeed" onchange="UpdateSpeed(hero)"> Speed</input>
@@ -37,6 +33,6 @@
 		</select>
 		<br>
 		<br>
-
+		<div id='Map'></div>
 	</body>
 </html>

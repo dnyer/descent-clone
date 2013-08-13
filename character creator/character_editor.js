@@ -160,6 +160,7 @@ function DisplayHero(hero) {
 		var displayArea = document.getElementById(attribute);
 		displayArea.innerHTML = hero.attributes[attribute]; // put hero's attribute in the correct field
 	}
+	CheckRequiredAttributes(hero); // see if any of the required attributes are lacking, highlight them
 }
 
 // flips hero's state on button press

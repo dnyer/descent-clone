@@ -10,8 +10,8 @@ var Illumination = 1; // represents the area's illumination. Multiply by each ch
 					  // 5 = noon
 
 function DisplaySpeedAndAwareness() {
-	document.getElementById('HeroSpeed') = hero.attributes[Speed];
-	document.getElementById('HeroAwareness') = hero.attributes[Awareness];
+	document.getElementById('HeroSpeed').value = hero.attributes['Speed'];
+	document.getElementById('HeroAwareness').value = hero.attributes['Awareness'];
 }
 
 function UpdateSpeed(speed) {

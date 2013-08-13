@@ -2,14 +2,14 @@
 <html>
 	<head>
 		<script src="../jquery-2.0.3.min.js"></script>
-
+		<script src="../hero.js"></script>
+		<script src="character_editor.js"></script>		
 		<link rel="stylesheet" type="text/css" href="characters.css"> </link> 
-
-		<script src="character_editor.js"></script>	
 		
 		<title>
 			Adventurers Online Character Creater
 		</title>
+
 	</head>
 	<body>
 		<script> //create the necessary variables
@@ -20,16 +20,16 @@
 		<body onload = "hero = new Hero('Unnamed Hero', 'None'); DisplayHero(hero)"><!-- when HTML loads, create new hero object, display in HTML-->
 		<table border=0><!-- Table for the class icons-->
 			<tr>
-				<td colspan=2 onclick="UpdateRole(hero, 'Fighter')"><img src="Fighter Class.png" >
-				<td colspan=2 onclick="UpdateRole(hero, 'Barbarian')"><img src="Barbarian Class.png">
-				<td colspan=2 onclick="UpdateRole(hero, 'Ranger')"><img src="Ranger Class.png">
-				<td colspan=2 onclick="UpdateRole(hero, 'Thief')"><img src="Thief Class.png">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Fighter')"><img src="Fighter Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Barbarian')"><img src="Barbarian Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Ranger')"><img src="Ranger Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Thief')"><img src="Thief Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
 			</tr>
 			<tr>
-				<td colspan=2 onclick="UpdateRole(hero, 'Sorcerer')"><img src="Sorcerer Class.png">
-				<td colspan=2 onclick="UpdateRole(hero, 'Summoner')"><img src="Summoner Class.png">
-				<td colspan=2 onclick="UpdateRole(hero, 'Sage')"><img src="Sage Class.png">
-				<td colspan=2 onclick="UpdateRole(hero, 'Paladin')"><img src="Paladin Class.png">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Sorcerer')"><img src="Sorcerer Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Summoner')"><img src="Summoner Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Sage')"><img src="Sage Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
+				<td colspan=2 width=250px height=250px align=center valign=center onclick="UpdateRole(hero, 'Paladin')"><img src="Paladin Class.png" onmouseover="this.width=225; this.height=225" onmouseout="this.width=200; this.height=200">
 			</tr>
 		</table><!--Hero traits: name, role, race, qualities, side, attributes-->
 		<table border=0 width=300px height=250px>

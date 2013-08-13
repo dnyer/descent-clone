@@ -410,5 +410,4 @@ function CalculateAttributes(hero) {
 			}
 		}	
 	}
-	CheckRequiredAttributes(hero);	// see if any of the required attributes are lacking, highlight them
 }

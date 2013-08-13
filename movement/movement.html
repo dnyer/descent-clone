@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="movement.js"></script>
+		<script src="../hero.js"></script>
+		<script src="../jquery-2.0.3.min.js"></script>
+		<title>Adventurers Movement Test</title>
+	</head>
+	<body>
+		<script>
+			Initialize();
+			var hero;
+		</script>
+		<body onLoad = "hero = new Hero('Steve', 'None'); DisplaySpeedAndAwareness()">
+		<input type="text" size=10 id="HeroSpeed" onchange="UpdateSpeed(hero)"> Speed</input>
+		<br>
+		<input type="text" size=10 id="HeroAwareness" onchange="UpdateAwareness(hero)"> Awareness</input>
+	</body>
+</html>

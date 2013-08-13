@@ -12,8 +12,31 @@
 			var hero;
 		</script>
 		<body onLoad = "hero = new Hero('Steve', 'None'); DisplaySpeedAndAwareness()">
+				<p>Map Size</p>
+		<select id='Map Size' onchange='ChangeMapSize()'>
+			<option value="36">6x6</option>
+			<option value="64">8x8</option>
+			<option value="100">10x10</option>
+			<option value="144">12x12</option>
+		</select>
+		<br>
+		<br>
 		<input type="text" size=10 id="HeroSpeed" onchange="UpdateSpeed(hero)"> Speed</input>
 		<br>
 		<input type="text" size=10 id="HeroAwareness" onchange="UpdateAwareness(hero)"> Awareness</input>
+		<br>
+		<br>
+		<p>Illumination Level</p>
+		<select id='Illumination' onchange='ChangeIllumination()'>
+			<option value="0">pitch black</option>
+			<option value="1">starlight</option>
+			<option value="2">moonlight</option>
+			<option value="3">torchlight</option>
+			<option value="4">dawn/dusk</option>
+			<option value="5">noon</option>
+		</select>
+		<br>
+		<br>
+
 	</body>
 </html>

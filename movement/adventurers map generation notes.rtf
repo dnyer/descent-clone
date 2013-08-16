@@ -20,4 +20,14 @@ CreateMoveField(hero_position, hero_MP) \{ // takes the hero's position, move po
 \
 a* equation: start with shortest path, if that path is equal to the distance (following the x + 1/2y OR y + 1/2x distance formula [whichever is lower, and always round down]), return that path, and you're done. If path is greater than distance, check each path and something something. Google A * algorithm.\
 \
-}
+\
+The map field data structure\
+\
+Map 2d array - created to size specified by player\
+	Map[x,y] - object representing one tile with set of properties and methods\
+		Map[x,y].wall = boolean\
+		Map[x,y].image = png file that loads in HTML\
+		Map[x,y].region = integer, refers to which glyph controls that part of the map\
+		Map[x,y].Entities() = function, returns entities present on that tile.\
+		Map[x,y].visibility = enumerated list (black, fogged, visible)\
+		}

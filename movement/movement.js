@@ -9,8 +9,32 @@ var illumination = 0; // represents the area's illumination. Multiply by each ch
 					  // 4 = sunset / sunrise
 					  // 5 = noon
 
-var mapRows = 6; // represent's # of map's rows.
-var mapColumns = 6; // represents # of map's columns.
+var mapRows = 255; // represent's # of map's rows.
+var mapColumns = 255; // represents # of map's columns.
+var MapData = 
+  "################################################################\n"
++ "#@          #                                #                 #\n"
++ "#           #                                #                 #\n"
++ "##########  #                                |                 #\n"
++ "#        #  #                                |                 #\n"
++ "#        #  #                                #                 #\n"
++ "#        #  #                                #                 #\n"
++ "#####   ##--##################--##############                 #\n"
++ "#                                            #                 #\n"
++ "#                                            #                 #\n"
++ "#--############################--####################--#########\n"
++ "#                    |        #  #        |                    #\n"
++ "#                    |        #  #        |                    #\n"
++ "#               ######       ##  ##       ######               #\n"
++ "#              ##    ##     ##    ##     ##    ##              #\n"
++ "#             ##      #######      #######      ##             #\n"
++ "#             #                                  #             #\n"
++ "#             #                                  #             #\n"
++ "#             #                                  #             #\n"
++ "################                                #######--#######\n"
++ "#              ##                              ##              #\n"
++ "#               ##                            ##               #\n"
++ "################################################################\n";
 
 function DisplaySpeedAndAwareness() {
 	document.getElementById('HeroSpeed').value = hero.attributes['Speed'];
@@ -53,10 +77,101 @@ function ChangeMapColumns() {
 }
 
 //in progress
+var visibility = {
+	BLACK:0,
+	FOGGED:1,
+	VISIBLE:2
+};
+
+var map = new Array();
 function Map(mapRows, mapColumns) {
 	document.getElementById('MapRows').value = mapRows;
 	document.getElementById('MapColumns').value = mapColumns;
-/*	map[mapRows, mapColumns] = new array(); // probably junky code, use as reference only
+	map = createArray(mapRows, mapColumns);
+	$('#Map').empty();
+	for (var i=0; i<mapRows; i++) {
+		var row = document.createElement('tr');
+		
+		document.getElementById('Map').appendChild(row);
+		for (var j=0; j<mapColumns; j++) {
+			map[i,j] = new Object();
+			map[i,j].xvalue = i;
+			map[i,j].yvalue= j;
+			map[i,j].wall = false;
+			map[i,j].region = 0;
+			map[i,j].visibility=visibility.VISIBLE;
+			var cell = document.createElement('td');
+			cell.id = "map_" + i + "_" + j;
+			var tile = document.createElement("img");
+			if(((i + j) %2) == 0) {
+				cell.bgcolor = "white";
+				tile.src = 'white tile.png';
+			} else {
+				cell.bgcolor = "grey";
+				tile.src = 'grey tile.png';
+			}
+			tile.style.display = "block";			
+
+			cell.onclick = function(event) {
+				console.log(this.id);
+			}
+
+			row.appendChild(cell);
+			cell.appendChild(tile);			
+		}
+	}
+			
+/*			if ((i+j) % 2 == 0 ) {
+				var tile = document.createElement("img");
+				tile.value = '(' + map[i,j].xvalue + ', ' + map[i,j].yvalue + ')';
+				tile.src = 'grey tile.png';
+				tile.style.cssFloat="none";
+				tile.style.width=64;
+				tile.style.height=64;
+				tile.onclick = function(event) {
+					console.log(tile.value);
+				};
+				document.getElementById('Map').appendChild(tile);
+			}
+			else {
+				var tile = document.createElement("img");
+				tile.src = 'white tile.png';
+				tile.style.cssFloat="none";
+				tile.style.width=64;
+				tile.style.height=64;
+				tile.value = '(' + map[i,j].xvalue + ', ' + map[i,j].yvalue + ')';
+				tile.onclick = function(event) {
+					console.log(tile.value);
+				};
+			document.getElementById('Map').appendChild(tile);
+		//	console.log("(" + map[i,j].xvalue + ", " + map[i,j].yvalue + ")");
+			}
+	//	console.log("\n");
+		for (square in map) {
+			if ((square.xvalue + square.yvalue) % 2 == 0) {
+				var tile = document.createElement("img");
+				tile.src = 'white tile.png';
+				tile.value = '(' + square.xvalue + ', ' + square.yvalue + ')';
+				tile.onclick = function(event) {
+					console.log(tile.value);
+				}
+				document.getElementById('Map').appendChild(tile);
+			}
+			else {
+				var tile = document.createElement("img");
+				tile.src = 'grey tile.png';
+				tile.value = '(' + square.xvalue + ', ' + square.yvalue + ')';
+				tile.onclick = function(event) {
+				console.log(tile.value);
+				}
+				document.getElementById('Map').appendChild(tile);
+			}
+		}
+		var br = document.createElement('br');
+		document.getElementById('Map').appendChild(br);
+	}
+
+	map[mapRows, mapColumns] = new array(); // probably junky code, use as reference only
 	
 	var mapElement = document.getElementById('Map').innerHTML;
 	var tileId = 0;
@@ -81,9 +196,9 @@ function Map(mapRows, mapColumns) {
 			tileId++;
 		}
 	mapElement.append(br);	
-	}
-	*/
+	}*/ //this is all crap. start over.
 }
+
 
 // A way to generate n-dimensional arrays. May want to use to create the 2d map array that refers to tile objects. picked up from http://bit.ly/14Ixo1h
 function createArray(length) {

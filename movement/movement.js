@@ -1,4 +1,4 @@
-
+//next step: make function that parses map data from a text file and fills map array based on data
 
 var illumination = 0; // represents the area's illumination. Multiply by each character's 
 					  // Awareness trait to generate their field of view.
@@ -9,8 +9,8 @@ var illumination = 0; // represents the area's illumination. Multiply by each ch
 					  // 4 = sunset / sunrise
 					  // 5 = noon
 
-var mapRows = 255; // represent's # of map's rows.
-var mapColumns = 255; // represents # of map's columns.
+var mapRows = 10; // represent's # of map's rows.
+var mapColumns = 10; // represents # of map's columns.
 var MapData = 
   "################################################################\n"
 + "#@          #                                #                 #\n"
@@ -103,7 +103,7 @@ function Map(mapRows, mapColumns) {
 			var cell = document.createElement('td');
 			cell.id = "map_" + i + "_" + j;
 			var tile = document.createElement("img");
-			if(((i + j) %2) == 0) {
+			if(((i + j) %1) == 0) {
 				cell.bgcolor = "white";
 				tile.src = 'white tile.png';
 			} else {
@@ -211,4 +211,14 @@ function createArray(length) {
     }
 
     return arr;
+}
+
+function handleFileSelect(evt) {
+	var files = evt.target.files; // FileList object
+	console.log(files);
+	var output = new Array();
+	output.push('name: ', files[0].name, '\ntype: ', files[0].type, '\nsize (bytes): ', files[0].size);
+	for (item in output) {
+		console.log(output[item]);
+	}
 }

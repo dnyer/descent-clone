@@ -6,7 +6,7 @@
 		<script src="../jquery-2.0.3.min.js"></script>
 		<title>Adventurers Movement Test</title>
 	</head>
-	<body style="height:100%; min-height:100%; max-height:100%; background-color:green; border:0px; margin:0px; padding:0px;" onLoad = "hero = new Hero('Steve', 'None'); DisplaySpeedAndAwareness(); Map(mapRows, mapColumns)">
+	<body style="height:100%; min-height:100%; max-height:100%; background-color:green; border:0px; margin:0px; padding:0px;" onLoad = "hero = new Hero('Steve', 'None'); DisplaySpeedAndAwareness(); Map(mapRows, mapColumns); document.getElementById('file').addEventListener('change', handleFileSelect, false);">
 		<script>
 			Initialize();
 			var hero;
@@ -37,6 +37,9 @@
 				<option value="5">noon</option>
 			</select>
 			<br>
+			<br>
+			<p>Submit a file: </p>
+			<input type="file" id="file" name="txtfile" size=25 "></input>
 			<br>
 		</div>
 	</body>
